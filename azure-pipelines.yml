@@ -38,7 +38,7 @@ steps:
       pytest $(Build.SourcesDirectory)
 
 - task: CmdLine@2
-  displayName: "Run tests"
+  displayName: "Build"
   inputs:
     script: |
       docker build --tag metadata-demo $(Build.SourcesDirectory)
