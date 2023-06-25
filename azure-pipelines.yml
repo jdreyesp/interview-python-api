@@ -28,7 +28,9 @@ steps:
   displayName: "Create virtual environment"
   inputs:
     scriptSource: 'inline'
-    script: 'python3 -m venv venv/ ; source venv/bin/activate'
+    script: |
+      python3 -m venv $(Build.SourceDirectory)/venv/
+      source $(Build.SourceDirectoy)/venv/bin/activate
 
 - task: PythonScript@0
   displayName: "Install dependencies"
