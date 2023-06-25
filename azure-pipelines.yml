@@ -1,0 +1,56 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.11.X'
+    addToPath: true
+    architecture: 'x64'
+  
+- task: PythonScript@0
+  displayName: "Create virtual environment"
+  inputs:
+    scriptSource: 'inline'
+    script: 'python3 -m venv venv/ ; source venv/bin/activate'
+
+- task: PythonScript@0
+  displayName: "Install dependencies"
+  inputs:
+    scriptSource: 'inline'
+    script: |
+      python3 -m pip3 install -r $(Build.SourcesDirectory)/requirements.txt
+      python3 -m pip3 install -r $(Build.SourcesDirectory)/src/test/test-requirements.txt
+
+- task: PythonScript@0
+  displayName: "Run tests"
+  inputs:
+    scriptSource: 'inline'
+    script: 'pytest $(Build.SourcesDirectory)'
+
+- task: PythonScript@0
+  displayName: "Build"
+  inputs:
+    scriptSource: 'inline'
+    script: |
+      docker build --tag metadata-demo $(Build.SourcesDirectory)
+      docker ps
+
+
+
+
