@@ -23,14 +23,6 @@ steps:
     versionSpec: '3.11.X'
     addToPath: true
     architecture: 'x64'
-  
-- task: CmdLine@2
-  displayName: "Create virtual environment"
-  inputs:
-    script: |
-      python3 -m venv $(Pipeline.Workspace)/venv/
-      chmod -R 660 $(Pipeline.Workspace)/venv/
-      source $(Pipeline.Workspace)/venv/bin/activate
 
 - task: CmdLine@2
   displayName: "Install dependencies"
