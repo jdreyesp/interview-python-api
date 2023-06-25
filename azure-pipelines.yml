@@ -29,7 +29,7 @@ steps:
   inputs:
     scriptSource: 'inline'
     script: |
-      python3 -m venv $(Build.SourceDirectory)/venv/
+      -m venv $(Build.SourceDirectory)/venv/
       source $(Build.SourceDirectoy)/venv/bin/activate
 
 - task: PythonScript@0
@@ -37,19 +37,18 @@ steps:
   inputs:
     scriptSource: 'inline'
     script: |
-      python3 -m pip3 install -r $(Build.SourcesDirectory)/requirements.txt
-      python3 -m pip3 install -r $(Build.SourcesDirectory)/src/test/test-requirements.txt
+      -m pip install -r $(Build.SourcesDirectory)/requirements.txt
+      -m pip install -r $(Build.SourcesDirectory)/src/test/test-requirements.txt
 
-- task: PythonScript@0
+- task: CmdLine@2
   displayName: "Run tests"
   inputs:
-    scriptSource: 'inline'
-    script: 'pytest $(Build.SourcesDirectory)'
+    script: |
+      pytest $(Build.SourcesDirectory)
 
-- task: PythonScript@0
-  displayName: "Build"
+- task: CmdLine@2
+  displayName: "Run tests"
   inputs:
-    scriptSource: 'inline'
     script: |
       docker build --tag metadata-demo $(Build.SourcesDirectory)
       docker ps
