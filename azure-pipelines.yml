@@ -29,6 +29,7 @@ steps:
   inputs:
     script: |
       python3 -m venv $(Build.SourceDirectory)/venv/
+      chmod -R 660 $(Build.SourceDirectory)/venv/
       source $(Build.SourceDirectoy)/venv/bin/activate
 
 - task: CmdLine@2
