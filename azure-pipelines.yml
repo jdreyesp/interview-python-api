@@ -6,7 +6,8 @@
 trigger:
 - main
 
-pool:
+pool: 
+  name: private-pool
   vmImage: MBD5C4CV4WXL
 
 steps:
