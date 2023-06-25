@@ -29,7 +29,7 @@ steps:
   inputs:
     script: |
       python3 -m pip install -r $(Build.SourcesDirectory)/requirements.txt
-      python3 -m pip install -r $(Build.SourcesDirectory)/src/tests/test-requirements.txt
+      python3 -m pip install -r $(Build.SourcesDirectory)/src/tests/tests-requirements.txt
 
 - task: CmdLine@2
   displayName: "Run tests"
