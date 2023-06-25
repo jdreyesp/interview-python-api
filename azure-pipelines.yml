@@ -24,21 +24,19 @@ steps:
     addToPath: true
     architecture: 'x64'
   
-- task: PythonScript@0
+- task: CmdLine@2
   displayName: "Create virtual environment"
   inputs:
-    scriptSource: 'inline'
     script: |
-      -m venv $(Build.SourceDirectory)/venv/
+      python3 -m venv $(Build.SourceDirectory)/venv/
       source $(Build.SourceDirectoy)/venv/bin/activate
 
-- task: PythonScript@0
+- task: CmdLine@2
   displayName: "Install dependencies"
   inputs:
-    scriptSource: 'inline'
     script: |
-      -m pip install -r $(Build.SourcesDirectory)/requirements.txt
-      -m pip install -r $(Build.SourcesDirectory)/src/test/test-requirements.txt
+      python3 -m pip install -r $(Build.SourcesDirectory)/requirements.txt
+      python3 -m pip install -r $(Build.SourcesDirectory)/src/test/test-requirements.txt
 
 - task: CmdLine@2
   displayName: "Run tests"
