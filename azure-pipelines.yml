@@ -29,8 +29,8 @@ steps:
   inputs:
     script: |
       python3 -m venv $(Pipeline.Workspace)/s/venv/
-      chmod -R 660 $(Pipeline.Workspace)/venv/
-      source $(Pipeline.Workspace)/venv/bin/activate
+      chmod -R 660 $(Pipeline.Workspace)/s/venv/
+      source $(Pipeline.Workspace)/s/venv/bin/activate
 
 - task: CmdLine@2
   displayName: "Install dependencies"
